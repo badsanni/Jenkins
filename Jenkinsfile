@@ -6,23 +6,23 @@ pipeline {
     }
 
     environment { 
-      URL = "test.femilab.com"
+        URL = "test.femilab.com"
     }
 
     stages {
         stage('Stage1') {
             environment { 
-              URL = "stage.femilab.com"
+                URL = "stage.femilab.com"
             }
 
             steps {
-                echo 'Hello world!, check out URL = ${URL} ' 
+                sh 'Hello world!, check out URL = ${URL} ' 
             }
         }
 
         stage('Stage2') {
             steps {
-                echo 'Lets move on, check out URL = ${URL}' 
+                sh 'Lets move on, check out URL = ${URL}' 
             }
         }
     }
