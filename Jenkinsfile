@@ -6,13 +6,13 @@ pipeline {
     }
 
     environment { 
-        URL = 'test.femilab.com'
+        URL = "test.femilab.com"
     }
 
     stages {
         stage('Stage1') {
             environment { 
-                URL = 'stage.femilab.com'
+                URL = "stage.femilab.com"
             }
 
             steps {
