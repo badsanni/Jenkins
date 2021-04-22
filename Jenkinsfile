@@ -16,13 +16,13 @@ pipeline {
             }
 
             steps {
-                sh 'Hello world!, check out URL = ${SURL} ' 
+                sh 'echo Hello world!, check out URL = ${SURL} ' 
             }
         }
 
         stage('Stage2') {
             steps {
-                sh 'Lets move on, check out URL = ${SURL}' 
+                sh 'echo Lets move on, check out URL = ${SURL}' 
             }
         }
     }
