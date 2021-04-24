@@ -1,21 +1,46 @@
 pipeline {
-    agent any
+    agent none
     stages {
-        stage('Example Build') {
+        stage('Non-Sequential Stage') {
+            agent {
+                label 'for-non-sequential'
+            }
             steps {
-                echo 'Hello World'
+                echo "On Non-Sequential Stage"
             }
         }
-        stage('Example Deploy') {
-            when {
-                expression { BRANCH_NAME ==~ /(production|staging)/ }
-                anyOf {
-                    environment name: 'DEPLOY_TO', value: 'production'
-                    environment name: 'DEPLOY_TO', value: 'staging'
-                }
+        stage('Sequential') {
+            agent {
+                label 'for-sequential'
             }
-            steps {
-                echo 'Deploying'
+            environment {
+                FOR_SEQUENTIAL = "some-value"
+            }
+            stages {
+                stage('In Sequential 1') {
+                    steps {
+                        echo "In Sequential 1"
+                    }
+                }
+                stage('In Sequential 2') {
+                    steps {
+                        echo "In Sequential 2"
+                    }
+                }
+                stage('Parallel In Sequential') {
+                    parallel {
+                        stage('In Parallel 1') {
+                            steps {
+                                echo "In Parallel 1"
+                            }
+                        }
+                        stage('In Parallel 2') {
+                            steps {
+                                echo "In Parallel 2"
+                            }
+                        }
+                    }
+                }
             }
         }
     }
